@@ -17,8 +17,7 @@ def userProfile(request, username):
         "otherUser":otherUser,
         "userProfile":userProfile,
         # "projects": projects,
-              
-        
+                  
     }
 
 

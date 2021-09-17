@@ -7,3 +7,30 @@
     background-size:100%;
     
 }
+
+.publish-project{
+    display: flex;
+    justify-content: center;
+}
+
+.publish-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* PROJECT DETAILS */
+.details-rate-review{
+    display: flex;
+    justify-content: center;
+}
+
+.rate-review #reviews{
+    display: none;
+}
+
+
+
+

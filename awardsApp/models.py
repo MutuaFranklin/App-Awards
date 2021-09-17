@@ -11,7 +11,7 @@ class Project(models.Model):
     project_image = CloudinaryField('Project image')
     description = models.TextField()
     technologies = models.CharField(max_length=200, blank=True)
-    link = models.URLField()
+    project_link = models.URLField()
     publisher = models.ForeignKey(Profile, on_delete=models.CASCADE)
     date_published = models.DateTimeField(auto_now_add=True, null = True)
     
@@ -46,12 +46,13 @@ class Project(models.Model):
 
 class Review(models.Model):
     project = models.ForeignKey(Project, on_delete= models.CASCADE, related_name='reviews')
-    comment = models.TextField()
+    review = models.TextField()
     reviewed_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     reviewed_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.comment
+        return f'{self.project} Review'
+
 
     def save_review(self):
         self.save()
@@ -65,17 +66,20 @@ class Review(models.Model):
 
 
 class Rating(models.Model):
-    rating = (
-        (1, '1'),(2, '2'),(3, '3'),(4, '4'),(5, '5'),
-        (6, '6'),(7, '7'),(8, '8'),(9, '9'),(10, '10'),
-    )
-
-    design = models.IntegerField(choices=rating, default=0, blank=True)
-    usability = models.IntegerField(choices=rating, blank=True)
-    content = models.IntegerField(choices=rating, blank=True)
+    # rating = (
+    #     (1, '1'),(2, '2'),(3, '3'),(4, '4'),(5, '5'),
+    #     (6, '6'),(7, '7'),(8, '8'),(9, '9'),(10, '10'),
+    # )
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ratings', null=True)
+    design = models.IntegerField(blank=True)
+    usability = models.IntegerField(blank=True)
+    content = models.IntegerField(blank=True)
     score = models.FloatField(default=0, blank=True)
     rated_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='rater')
-    post = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='ratings', null=True)
+
+
+    def __str__(self):
+            return f'{self.project} Rating'
 
     def save_rating(self):
         self.save()
@@ -88,5 +92,4 @@ class Rating(models.Model):
         ratings = Rating.objects.filter(post_id=id).all()
         return ratings
 
-    def __str__(self):
-        return f'{self.project} Rating'
+   

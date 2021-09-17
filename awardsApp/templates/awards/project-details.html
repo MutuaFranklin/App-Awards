@@ -1,21 +1,107 @@
 {%extends 'awards/base.html'%}
 {% load static %}
+{% load bootstrap5%}
 {% block content %}
 
 
-<div class="container-fluid">
+<div class="container-fluid details-rate-review">
 
-  <div class="col-md-10 project-details">
+  <div class="col-md-8 project-details">
 
-    <div class="card" style="width: 48rem;">
-      <img src="..." class="card-img-top" alt="...">
+    <div class="card m-1 p-d" style="width: 70rem;">
+      <a href=""><img src="{{project.project_image.url}}"
+              class="card-img-top" height="500" alt="..."></a>
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+          <h5 class="card-title">{{project.title}}</h5>
+          <p class="card-text">{{project.description}}</p>
       </div>
     </div>
+
+    <div class="rate-review mt-5">
+      <div class="card text-center">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="true" href="#" onClick="return showRatings();">Ratings</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onClick="return showReviews();">Reviews</a>
+            </li>
+            
+          </ul>
+        </div>
+        <div class="card-body">
+          <!-- Ratings -->
+          <div id="ratings">
+            <h5 class="card-title m-2">Project Ratings</h5>
+            <button type="button" class="btn btn-primary">Design Average</button>
+            <button type="button" class="btn btn-primary">Usability Average</button>
+            <button type="button" class="btn btn-primary">Content Average</button>
+            <button type="button" class="btn btn-primary">Average Score</button>
+
+
+            <!-- RateForm -->
+            {% if profile in project.ratings.all %}
+              <p>Thankyou for your rating participation</p>
+
+            {% else %}
+            <div class=" rateForm mt-4">
+              <h6>Rate this Project</h6>
+
+              <form action="" method="post">
+                {% csrf_token %}
+                  <div class="row">
+                    <div class="col">
+                      {{rateForm.design }}              
+                    </div>
+                    <div class="col">
+                      {{ rateForm.usability }}              
+                    </div>
+                    <div class="col">
+                      {{ rateForm.content }}              
+                    </div>
+                    <div class="col">
+                      <button class="btn btn-sm btn-primary">Rate</button>                   
+                    </div>
+                  </div>
+                </form>
+                
+            </div>
+            {% endif %}
+          </div>
+
+          <div id="reviews">
+              <!-- Review Form -->
+              <div class="reviewForm ">
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#reviewModal">Review this Project</button>
+
+                {% include "modals/reviewModal.html" %}
+
+                <h6>Available Reviews</h6>
+                {% for review in project.reviews.all %}
+                  <h6 class="text-mute">{{review.reviewed_by}}</h6>
+                  <p>{{review.review}}</p>
+                  <p class="text-mute">Reviewed {{review.reviewed_on|timesince}} ago </p>
+
+                {% endfor%}
+
+
+                
+              </div>
+
+          </div>
+         
+        </div>
+      </div>
+    
+      
+
+    
+
+    </div>
+    
+    
+
 
 
   </div>

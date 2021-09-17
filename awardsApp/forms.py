@@ -1,4 +1,5 @@
 
+from awardsApp.models import Project, Rating, Review
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -27,7 +28,30 @@ class UserRegistrationForm(UserCreationForm):
 # class LoginForm(forms.Mod):
 
 
+class PublishProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ('title', 'description', 'project_link', 'project_image','technologies',)
 
+
+class RatingsForm(forms.ModelForm):
+    class Meta:
+        model = Rating
+        fields = ('design', 'usability', 'content')
+        widgets = {
+            'design':forms.TextInput(attrs = {'class':'form-control', 'type':'number', 'min':1 ,'max':10, 'required': "True", 'placeholder':"Design", 'label': 'Design'}),
+            'usability':forms.TextInput(attrs = {'class':'form-control','type':'number','min':1 ,'max':10,'required': "True", 'placeholder':"Usability", 'label': 'Usability'}),
+            'content':forms.TextInput(attrs = {'class':'form-control', 'type':'number','min':1 ,'max':10,'required': "True", 'placeholder':"Content", 'label': 'Content'}),
+        }
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ('review',)
+
+
+
+ 
 
 
 
