@@ -1,0 +1,9 @@
+
+.featured{
+    height: 50rem;
+    background-image: url("/static/images/ML@.jpg");
+    /* background-image: url( "{% static 'images/ML.jpg' %}"); */
+    background-repeat:no-repeat;
+    background-size:100%;
+    
+}
