@@ -34,17 +34,13 @@
           <!-- Ratings -->
           <div id="ratings">
             <h5 class="card-title m-2">Project Ratings</h5>
-            <button type="button" class="btn btn-primary">Design Average</button>
-            <button type="button" class="btn btn-primary">Usability Average</button>
-            <button type="button" class="btn btn-primary">Content Average</button>
-            <button type="button" class="btn btn-primary">Average Score</button>
-
+            <button type="button" class="btn btn-primary">Design Average: {{design}}</button>
+            <button type="button" class="btn btn-primary">Usability Average: {{usability}}</button>
+            <button type="button" class="btn btn-primary">Content Average: {{content}}</button>          
+            <button type="button" class="btn btn-primary">Average Score: {{score}}</button>
 
             <!-- RateForm -->
-            {% if profile in project.ratings.all %}
-              <p>Thankyou for your rating participation</p>
-
-            {% else %}
+           
             <div class=" rateForm mt-4">
               <h6>Rate this Project</h6>
 
@@ -67,7 +63,6 @@
                 </form>
                 
             </div>
-            {% endif %}
           </div>
 
           <div id="reviews">
