@@ -3,10 +3,45 @@
 {% block content %}
 
 
-<div class="container-fluid">
+<div class="container-fluid profile">
+    <h5>Profile</h5>
 
-    <div class="col-md-10 publish">
-        <h5>Profile</h5>
+    <div class="col-md-12 userProfile d-flex">
+        
+
+        <div class="col-md-4 user-details">
+            <div class="card" style="width: 18rem;">
+                <img src="{{profile.profile_pic.url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-text">{{profile.user.username}}</h6>
+
+
+                  <p class="card-text">{{profile.user.first_name}} {{profile.user.last_name}} </p>
+                </div>
+              </div>
+            {{profile.bio}}
+
+        </div>
+        <div class="col-md-8 user-projects">
+            <div class="row">
+                {% for project in projects %}
+    
+                <div class="card m-1" style="width: 15rem;">
+                    <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url}}"
+                            class="card-img-top" height="200" alt="..."></a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{project.title}}</h5>
+                        <p class="card-text">{{project.description}}</p>
+                    </div>
+                </div>
+    
+                {% empty %}
+                <p>No posted projects</p>
+    
+                {% endfor %}
+            </div>
+
+        </div>
 
 
     </div>

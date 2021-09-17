@@ -145,12 +145,6 @@ def projectDetails(request, id):
             return redirect(request.META.get('HTTP_REFERER'))
     else:
         rateForm = RatingsForm()
-
-   
-
-
-    
-
    
     title = 'Project Details'
     context = {
@@ -167,8 +161,27 @@ def projectDetails(request, id):
       
     }
     # template = loader.get_template('awards/project-details.html')
-
-    return render(request, 'awards/project-details.html', context )
     # return HttpResponse(template.render(context, request))
 
+    return render(request, 'awards/project-details.html', context )
 
+
+def search_project(request):
+    if 'project_title' in request.GET and request.GET["project_title"]:
+        search_project = request.GET.get("project_title")
+        print(search_project)
+        searched_projects = Project.search_project(search_project)
+        print(searched_projects)
+        message = f"{search_project}"
+
+        context = {
+            "message":message,
+            "searched_projects": searched_projects
+        }
+
+
+        return render(request, 'awards/search.html', context)
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'awards/search.html',{"message":message})

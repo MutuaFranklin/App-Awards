@@ -2,11 +2,32 @@
 {% block content %}
 <div class="container">
 
-  <div class="row">
-    <h4>Found    of searched term </h4>
-      <h4> Found 0 articles for the search term </h4>
+    {% if searched_projects %}
+      <h4>Found {{ searched_projects|length }} of searched project: {{message}}</h4>
+    {% else %}
+      <h4> Found 0 projects for the searched project:  {{message}}</h4>
+    {% endif %}
 
+
+  {%for project in searched_projects %}
+  <div class="col-md-4">
+      <div class="row">
+          
+        <div class="card m-1" style="width: 15rem;">
+          <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url}}"
+                  class="card-img-top" height="200" alt="..."></a>
+          <div class="card-body">
+              <h5 class="card-title">{{project.title}}</h5>
+              <p class="card-text">{{project.description}}</p>
+          </div>
+      </div>
+      </div>
   </div>
+  {% empty %}
+  <div class="row">
+      <h5 class="text-center">No user found</h5>
+  </div>
+  {% endfor %}
 
   <div class="row">
 

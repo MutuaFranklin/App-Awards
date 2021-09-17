@@ -14,6 +14,8 @@
       <div class="card-body">
           <h5 class="card-title">{{project.title}}</h5>
           <p class="card-text">{{project.description}}</p>
+          <a href="{%url 'userProfile' project.publisher%}"><p class="card-text">Published by: {{project.publisher}}</p></a>
+
       </div>
     </div>
 
@@ -40,7 +42,17 @@
             <button type="button" class="btn btn-primary">Average Score: {{score}}</button>
 
             <!-- RateForm -->
-           
+            <!-- {{rating}} -->
+            {% if request.user in rating %}
+            
+              <p>Thankyou for your rating participation</p>
+
+          
+          
+            {% else %}
+            <p>Not yet</p>
+
+            {% endif %}
             <div class=" rateForm mt-4">
               <h6>Rate this Project</h6>
 

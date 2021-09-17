@@ -11,12 +11,12 @@ def userProfile(request, username):
     otherUser = get_object_or_404(User, username=username)
     userProfile = Profile.objects.get(user=otherUser)
     myProfile = Profile.objects.get(user=request.user)
-    # projects = Project.objects.filter(posted_by = userProfile).order_by('-posted_on')
+    projects = Project.objects.filter(publisher = myProfile)
 
     context ={
         "otherUser":otherUser,
-        "userProfile":userProfile,
-        # "projects": projects,
+        "profile":userProfile,
+        "projects": projects,
                   
     }
 

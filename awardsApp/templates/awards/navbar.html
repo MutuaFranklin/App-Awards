@@ -7,8 +7,8 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <form class="d-flex" style="margin-left: 30%;"  role="search" action="">
-        <input class="form-control me-2" type="search" name="username"  placeholder="Search" aria-label="Search">
+      <form class="d-flex" style="margin-left: 30%;"  role="search" action="{% url 'search_project'%}">
+        <input class="form-control me-2" type="search" name="project_title"  placeholder="Search" aria-label="Search">
        
       </form>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">

@@ -10,11 +10,10 @@ urlpatterns=[
     path('register/', views.register, name='register'),
     path('account/', include('django.contrib.auth.urls')),
     path('', views.home, name='home'),
-    # re_path(r'publish/', views.publish_project, name='publish-project'),
     path('project-details/<int:id>', views.projectDetails, name='project-details'),
-
-
     path('publish-project/', views.publishProject, name='publish-project'),
+    path('search/', views.search_project, name='search_project'),
+
 
 
 
