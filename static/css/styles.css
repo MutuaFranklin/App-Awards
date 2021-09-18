@@ -26,6 +26,11 @@
     text-align: start !important;
 }
 
+.proj-card{
+    display: flex;
+    flex-direction: column;
+    align-items:center ;
+}
 .projects{
     display: flex;
     flex-direction: column;
@@ -231,6 +236,34 @@
 .rate-review #reviews{
     display: none;
 }
+.publisher{
+   height: 40px; 
+   width: 130px;
+   background-color: rgb(13, 66, 238);
+   border-radius: 10px;
+   border: 4px double rgb(3, 52, 99);
+   color: white;
+   font-family: 'Sofia', cursive;
+
+}
+
+.proj-description{
+    text-align: center;
+}
+
+.review-details{
+    height: auto;
+    text-align: left;
+    background-color: rgb(229, 232, 248);
+    border-radius: 10px;
+
+}
+
+.review-details a{
+    text-decoration: none;
+}
+
+
 
 /* Progress Bar 1 */
 
@@ -261,6 +294,8 @@
 	text-align: center;
 	display: block;
 }
+
+
 
 @keyframes load {
 	0% {
@@ -419,6 +454,11 @@
 }
 .shadow-none {
     box-shadow: none!important;
+}
+
+/* USERPROFILE */
+.prof-proj{
+    text-align: center;
 }
 
 

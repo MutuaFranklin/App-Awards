@@ -30,10 +30,44 @@
 
                         <div class="mt-3">
                           <h4>{{profile.user.first_name}} {{profile.user.last_name}} </h4>
-                          <p class="text-secondary mb-1">{{profile.user.username}}</p>
-                          <p class="text-muted font-size-sm">{{profile.bio}}</p>
-                          <button class="btn btn-primary">Follow</button>
-                          <button class="btn btn-outline-primary">Message</button>
+                          <p class=" mb-1">{{profile.user.username}}</p>
+                          <p class="text-muted font-size-sm">{{profile.gender}}</p>
+                          <div class="follow-details d-flex">
+                            <i class="fa fa-users mt-1"></i>
+                            <span class="following ms-1 fw-bold">{{profile.followers.count}}</span>
+                            <p class="ms-1 fw-light">following.</p>
+                            <span class="followers ms-1  fw-bold">{{profile.followers.count}}</span>
+                            <p class="ms-1 fw-light">followers.</p>
+                    
+                          </div>
+                          <p class="text-muted fw-light font-size-sm">{{profile.bio}}</p>
+
+                          <div class="follow d-flex">
+                            {% if request.user != profile.user %}
+
+                            {% if follow %}
+                            <form method="post" action="{% url 'follow_unfollow'%}">
+                              {%csrf_token%}
+                              <input hidden name="userProf_id" value="{{profile.user.id}}">
+                              <button class="btn btn-outline-danger m-2">Unfollow</button>
+                            </form>
+
+                            <button class="btn btn-outline-primary m-2">Message</button>
+                            {% else %}
+                            <form method="post" action="{% url 'follow_unfollow'%}">
+                              {%csrf_token%}
+                              <input hidden name="userProf_id" value="{{profile.user.id}}">
+                              <button class="btn btn-primary m-2">Follow</button>
+
+                            </form>
+
+
+                            {% endif %}
+                          {% endif %}
+
+                          </div>
+                          
+
                         </div>
                       </div>
                     </div>
@@ -73,7 +107,6 @@
                       </div>
                       <hr>
                       
-                      <hr>
                       <div class="row">
                         <div class="col-sm-3">
                           <h6 class="mb-0">Mobile</h6>
@@ -100,19 +133,19 @@
                     </div>
                   </div>
     
-                  <div class="row gutters-sm">
-                      <h6>Projects Published</h6>
+                  <div class="row gutters-sm prof-proj">
+                      <h6 class="text-centre">Projects Published</h6>
           
                     {% for project in projects %}
                     <div class="col-sm-6 mb-3">
                       <div class="card h-100">
                         <div class="card-body">
-                          <h6 class="d-flex align-items-center mb-3">{{project.title}}</h6>
+                          <h6 class="d-flex justify-content-center mb-3">{{project.title}}</h6>
                           <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url}}"
                             class="card-img-top" height="200" alt="..."></a>
                           <small>{{project.technologies}}</small>
 
-                          {{project.description}}
+                          <p class="small">{{project.description}}</p>
                          
                           
                         </div>

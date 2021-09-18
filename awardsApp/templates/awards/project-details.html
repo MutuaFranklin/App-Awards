@@ -12,9 +12,26 @@
       <a href=""><img src="{{project.project_image.url}}"
               class="card-img-top" height="500" alt="..."></a>
       <div class="card-body">
-          <h5 class="card-title">{{project.title}}</h5>
-          <p class="card-text">{{project.description}}</p>
-          <a href="{%url 'userProfile' project.publisher%}"><p class="card-text">Published by: {{project.publisher}}</p></a>
+        <div class="proj-description">
+           <h5 class="card-title">{{project.title}}</h5>
+           <p class="card-text small">Published {{project.date_published}}</p>
+           <p class="card-text small fw-light">Technologies: {{project.technologies}}</p>
+           <p class="card-text">{{project.description}}</p>
+        </div>
+         
+          <div class="buttons d-flex justify-content-between">
+            <a href="{%url 'userProfile' project.publisher%}">
+              <button class="publisher  fw-light">
+                By {{project.publisher}}
+              </button>
+            </a>
+            <a href="{{project.project_link.url}}" target="_blank">
+              <button class="publisher small fw-light">
+                Project link
+              </button>
+            </a>
+
+          </div>
 
       </div>
     </div>
@@ -39,7 +56,7 @@
             <div class="col-md-5 rates">
             <h6 class="mt-2 fw-light">Average Design</h6>
               <div class="progressDesign">
-                <div class="progress-value1" style="width: 60%"><span class="">{{design}}</span></div>
+                <div class="progress-value1" style="width:50%"><span class="">{{design}}</span></div>
               </div>
 
               <h6 class="mt-2 fw-light">Average Usability</h6>
@@ -54,7 +71,7 @@
               
               <h6  class="mt-2 fw-light">Average Score</h6>
               <div class="progressScore">
-                <div class="progress-value4" style="width: 60%"><span> {{score}}</span></div>
+                <div class="progress-value4" style="width: 64%"><span> {{score}}</span></div>
               </div>
               
             <!-- <button type="button" class="btn btn-primary">Design Average: {{design}}</button>
@@ -107,10 +124,12 @@
 
                 <h6>Available Reviews</h6>
                 {% for review in project.reviews.all %}
-                  <h6 class="text-mute">{{review.reviewed_by}}</h6>
-                  <p>{{review.review}}</p>
-                  <p class="text-mute">Reviewed {{review.reviewed_on|timesince}} ago </p>
+                  <div class="review-details">
+                     <h6 class="text-mute m-4"><a href="{%url 'userProfile' review.reviewed_by%}">{{review.reviewed_by}}</a> <span class="text-mute fw-light">{{review.reviewed_on|timesince}} ago</span></h6>
+                      <p class="fw-light  m-4">{{review.review}}</p>
 
+                  </div>
+                 
                 {% endfor%}
 
 
