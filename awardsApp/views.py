@@ -98,9 +98,9 @@ def projectDetails(request, id):
     content = Rating.objects.filter(project_id=id).values_list('content',flat=True)
     if ( len(design) > 0) and ( len(usability) > 0) and ( len(content) > 0):
 
-        avg_design = statistics.mean(design)
-        avg_usability = statistics.mean(usability)
-        avg_content = statistics.mean(content)
+        avg_design = round(statistics.mean(design),2)
+        avg_usability = round(statistics.mean(usability),2)
+        avg_content = round(statistics.mean(content),2)
         total_score = float(avg_usability + avg_design + avg_content)
         avg_score =round((total_score/3),2 )
 
