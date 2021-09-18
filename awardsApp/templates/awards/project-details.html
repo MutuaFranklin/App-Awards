@@ -36,11 +36,32 @@
           <!-- Ratings -->
           <div id="ratings">
             <h5 class="card-title m-2">Project Ratings</h5>
-            <button type="button" class="btn btn-primary">Design Average: {{design}}</button>
+            <div class="col-md-5 rates">
+            <h6 class="mt-2 fw-light">Average Design</h6>
+              <div class="progressDesign">
+                <div class="progress-value1" style="width: 60%"><span class="">{{design}}</span></div>
+              </div>
+
+              <h6 class="mt-2 fw-light">Average Usability</h6>
+              <div class="progressUsability">
+                <div class="progress-value2" style="width: 60%"><span>{{usability}}</span></div>
+              
+              </div>
+              <h6 class="mt-2 fw-light">Average Content</h6>
+              <div class="progressContent">
+                <div class="progress-value3" style="width: 60%"><span>{{content}}</span></div>
+              </div>
+              
+              <h6  class="mt-2 fw-light">Average Score</h6>
+              <div class="progressScore">
+                <div class="progress-value4" style="width: 60%"><span> {{score}}</span></div>
+              </div>
+              
+            <!-- <button type="button" class="btn btn-primary">Design Average: {{design}}</button>
             <button type="button" class="btn btn-primary">Usability Average: {{usability}}</button>
             <button type="button" class="btn btn-primary">Content Average: {{content}}</button>          
-            <button type="button" class="btn btn-primary">Average Score: {{score}}</button>
-
+            <button type="button" class="btn btn-primary">Average Score: {{score}}</button> -->
+          </div>
             <!-- RateForm -->
             <!-- {{rating}} -->
             {% if request.user in rating %}
@@ -53,7 +74,7 @@
             <p>Not yet</p>
 
             {% endif %}
-            <div class=" rateForm mt-4">
+            <div class=" col-md-8 rateForm mt-4">
               <h6>Rate this Project</h6>
 
               <form action="" method="post">

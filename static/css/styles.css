@@ -1,3 +1,13 @@
+.navbar{
+    font-family: 'Sofia', cursive;
+    font-weight: bold;
+    color: darkblue !important;
+}
+.navbar-brand{
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(17, 60, 204) !important;
+}
 
 .featured{
     height: 50rem;
@@ -5,16 +15,57 @@
     /* background-image: url( "{% static 'images/ML.jpg' %}"); */
     background-repeat:no-repeat;
     background-size:100%;
+    display: flex;
+    justify-content: center;
     
 }
 
+.headline{
+    color: white;
+    margin-top: 3%;
+    text-align: start !important;
+}
+
+.projects{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home-details{
+    margin-top: 14%;
+    margin-left: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.proj-details{
+    color: white;
+    text-align: center;
+
+}
+
+.proj-details h5{
+    font-family: 'Sofia', cursive;
+
+
+}
+
+.home-progress-bar p{
+    margin-top: 5%;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-size: 10 !important;
+}
 
 .progress{
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
     background: none;
-    margin: 0 auto;
+    margin: 1rem;
     box-shadow: none;
     position: relative;
 }
@@ -23,7 +74,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    border: 15px solid #f2f5f5;
+    border: 5px solid #f2f5f5;
     position: absolute;
     top: 0;
     left: 0;
@@ -43,7 +94,7 @@
     width: 100%;
     height: 100%;
     background: none;
-    border-width: 15px;
+    border-width: 5px;
     border-style: solid;
     position: absolute;
     top: 0;
@@ -172,14 +223,156 @@
     display: flex;
     justify-content: center;
 }
-
+#ratings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .rate-review #reviews{
     display: none;
 }
 
+/* Progress Bar 1 */
 
+.progressDesign {
+	background: rgba(0, 0, 0, 0.1);
+	justify-content: flex-start;
+	border-radius: 100px;
+	align-items: center;
+	position: relative;
+	padding: 0 5px;
+	display: flex;
+	height: 40px;
+	width: 100%;
+}
 
+.progress-value1 {
+	animation: load 3s normal forwards;
+	box-shadow: 0 10px 40px -10px #fff;
+	border-radius: 100px;
+	background: #662601;
+	height: 30px;
+	width: 0;
+}
 
+.progress-value1 span {
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	display: block;
+}
+
+@keyframes load {
+	0% {
+		width: 0;
+	}
+}
+
+.progressUsability {
+    background: rgba(0, 0, 0, 0.1);
+    justify-content: flex-start;
+    border-radius: 100px;
+    align-items: center;
+    position: relative;
+    padding: 0 5px;
+    display: flex;
+    height: 40px;
+    width: 100%;
+}
+
+.progress-value2 {
+    animation: load 3s normal forwards;
+    box-shadow: 0 10px 40px -10px #fff;
+    border-radius: 100px;
+    background: #1417c5;
+    height: 30px;
+    width: 0;
+}
+
+.progress-value2 span {
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    display: block;
+}
+
+@keyframes load {
+    0% {
+        width: 0;
+    }
+
+}
+/* Progress Bar 3 */
+
+.progressContent {
+	background: rgba(0, 0, 0, 0.1);
+	justify-content: flex-start;
+	border-radius: 100px;
+	align-items: center;
+	position: relative;
+	padding: 0 5px;
+	display: flex;
+	height: 40px;
+	width: 100%;
+}
+
+.progress-value3 {
+	animation: load 3s normal forwards;
+	box-shadow: 0 10px 40px -10px #fff;
+	border-radius: 100px;
+	background: #418660;
+	height: 30px;
+	width: 0;
+}
+
+.progress-value3 span {
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	display: block;
+}
+
+@keyframes load {
+	0% {
+		width: 0;
+	}
+}
+/* Progress Bar 4 */
+
+.progressScore {
+	background: rgba(0, 0, 0, 0.1);
+	justify-content: flex-start;
+	border-radius: 100px;
+	align-items: center;
+	position: relative;
+	padding: 0 5px;
+	display: flex;
+	height: 40px;
+	width: 100%;
+}
+
+.progress-value4 {
+	animation: load 3s normal forwards;
+	box-shadow: 0 10px 40px -10px #fff;
+	border-radius: 100px;
+	background: #219cbb;
+	height: 30px;
+	width: 0;
+}
+
+.progress-value4 span {
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	display: block;
+}
+
+@keyframes load {
+	0% {
+		width: 0;
+	}
+
+}
 .main-body {
     padding: 15px;
 }
