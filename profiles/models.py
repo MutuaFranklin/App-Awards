@@ -16,6 +16,8 @@ class Profile(models.Model):
     mobile = models.CharField(max_length=18, blank=True)
     website = models.URLField(blank=True)
     github = models.URLField(blank=True)
+    followers=models.ManyToManyField(User,related_name='followers', blank=True)
+    following=models.ManyToManyField(User,related_name='following', blank=True)
 
     def __str__(self):
         return self.user.username
