@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import Profile
 from awardsApp.models import Project
@@ -20,10 +20,22 @@ def userProfile(request, username):
     myProfile = Profile.objects.get(user=request.user)
     projects = Project.objects.filter(publisher = myProfile)
 
+    if userProfile.user in myProfile.following.all():
+            follow = True
+    else:
+        follow = False
+
+    if myProfile.user in userProfile.followers.all():
+        follower = True
+    else:
+        follower = False
+
     context ={
         "otherUser":otherUser,
         "profile":userProfile,
         "projects": projects,
+        "follow":follow,
+        "follower": follower,  
                   
     }
 
@@ -46,5 +58,32 @@ class UpdateProfileView(UpdateView):
         def get_success_url(self):
         
             return reverse_lazy('userProfile',args=[self.request.user.username]) 
+
+
+def follow_unfollow(request):
+    if request.method == 'POST':
+            if 'userProf_id' in request.POST:
+                userProf_id = request.POST.get('userProf_id')
+                userProf = User.objects.get(id=userProf_id) 
+
+                myProf = Profile.objects.get(user=request.user)
+                oProf = Profile.objects.get(user=userProf)
+
+
+                if  oProf.user in myProf.following.all():
+                    myProf.following.remove(oProf.user)
+                    myProf.save()
+                else:
+                    myProf.following.add(userProf) 
+                    myProf.save()
+
+                if  myProf.user in oProf.followers.all():
+                    oProf.followers.remove(myProf.user)
+                    oProf.save()
+                else:
+                    oProf.followers.add(myProf.user)
+                    oProf.save()
+
+                return redirect(request.META.get('HTTP_REFERER'))
 
 
