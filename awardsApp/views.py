@@ -115,6 +115,11 @@ def projectDetails(request, id):
         total_score = float(avg_usability + avg_design + avg_content)
         avg_score =round((total_score/3),2 )
 
+        percentage_design= avg_design * 10
+        percentage_usability= avg_usability * 10
+        percentage_content= avg_content * 10
+        percentage_score= avg_score * 10
+
     else:
         avg_design = 0
         avg_usability = 0
@@ -169,6 +174,10 @@ def projectDetails(request, id):
         "usability":avg_usability,
         "content":avg_content,
         "score":avg_score,
+        "pd":percentage_design,
+        "pu":percentage_usability,
+        "pc":percentage_content,
+        "ps":percentage_score
       
     }
     # template = loader.get_template('awards/project-details.html')
