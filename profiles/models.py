@@ -7,9 +7,11 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 class Profile(models.Model):
+    gender_choice = ("Male", "Male"),("Female","Female")
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     profile_pic = CloudinaryField('Profile Pic')
     bio =  models.TextField(blank=True, default='Welcome to my world')
+    gender = models.TextField(blank=True, choices=gender_choice)
     location = models.CharField(max_length = 50,blank=True)
     mobile = models.CharField(max_length=18, blank=True)
     website = models.URLField(blank=True)
