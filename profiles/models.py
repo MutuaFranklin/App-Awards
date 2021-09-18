@@ -11,7 +11,9 @@ class Profile(models.Model):
     profile_pic = CloudinaryField('Profile Pic')
     bio =  models.TextField(blank=True, default='Welcome to my world')
     location = models.CharField(max_length = 50,blank=True)
-    link = models.URLField(blank=True)
+    mobile = models.CharField(max_length=18, blank=True)
+    website = models.URLField(blank=True)
+    github = models.URLField(blank=True)
 
     def __str__(self):
         return self.user.username
