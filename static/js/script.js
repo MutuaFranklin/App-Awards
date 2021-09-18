@@ -15,9 +15,9 @@ function copyToClipboard() {
 
 
 function showRatings() {
-    document.getElementById("ratings").style.display = " block"; 
+    document.getElementById("ratings").style.display = " block";
+    document.getElementById("ratings").style.display = " flex";  
     document.getElementById("reviews").style.display = "none"; 
-
 
 }
 
