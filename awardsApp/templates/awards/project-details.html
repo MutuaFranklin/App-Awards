@@ -8,7 +8,7 @@
 
   <div class="col-md-8 project-details">
 
-    <div class="card m-1 p-d" style="width: 70rem;">
+    <div class="card m-1 p-d" style="width: 69rem;">
       <a href=""><img src="{{project.project_image.url}}"
               class="card-img-top" height="500" alt="..."></a>
       <div class="card-body">
@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <div class="rate-review mt-5">
+    <div class="rate-review mt-5 col-md-11">
       <div class="card text-center">
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs">
@@ -81,16 +81,25 @@
           </div>
             <!-- RateForm -->
             <!-- {{rating}} -->
-            {% if request.user in rating %}
+            {% for rat in project.ratings.all %}
             
-              <p>Thankyou for your rating participation</p>
+              <p>{{rat.rated_by}}</p>
+              
 
           
           
-            {% else %}
-            <p>Not yet</p>
+            {% endfor %}
 
+            {% if profile in project.ratings.all %}
+            
+              <p>Done</p>
+              
+
+          
+          
             {% endif %}
+
+            
             <div class=" col-md-8 rateForm mt-4">
               <h6>Rate this Project</h6>
 
@@ -107,7 +116,7 @@
                       {{ rateForm.content }}              
                     </div>
                     <div class="col">
-                      <button class="btn btn-sm btn-primary">Rate</button>                   
+                      <button class="btn btn-sm btn-primary" style="height: 40px; width: 5rem;" >Rate</button>                   
                     </div>
                   </div>
                 </form>

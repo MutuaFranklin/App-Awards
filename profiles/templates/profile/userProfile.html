@@ -34,7 +34,7 @@
                           <p class="text-muted font-size-sm">{{profile.gender}}</p>
                           <div class="follow-details d-flex">
                             <i class="fa fa-users mt-1"></i>
-                            <span class="following ms-1 fw-bold">{{profile.followers.count}}</span>
+                            <span class="following ms-1 fw-bold">{{profile.following.count}}</span>
                             <p class="ms-1 fw-light">following.</p>
                             <span class="followers ms-1  fw-bold">{{profile.followers.count}}</span>
                             <p class="ms-1 fw-light">followers.</p>
@@ -42,7 +42,7 @@
                           </div>
                           <p class="text-muted fw-light font-size-sm">{{profile.bio}}</p>
 
-                          <div class="follow d-flex">
+                          <div class="follow d-flex justify-content-centre">
                             {% if request.user != profile.user %}
 
                             {% if follow %}
@@ -57,7 +57,7 @@
                             <form method="post" action="{% url 'follow_unfollow'%}">
                               {%csrf_token%}
                               <input hidden name="userProf_id" value="{{profile.user.id}}">
-                              <button class="btn btn-primary m-2">Follow</button>
+                              <button class="btn btn-primary ms-5 m-2">Follow</button>
 
                             </form>
 

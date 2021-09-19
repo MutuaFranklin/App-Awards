@@ -1,3 +1,7 @@
+body{
+    background-color: rgb(212, 221, 233,0.5);
+}
+
 .navbar{
     font-family: 'Sofia', cursive;
     font-weight: bold;
@@ -254,7 +258,7 @@
 .review-details{
     height: auto;
     text-align: left;
-    background-color: rgb(229, 232, 248);
+    background-color: rgb(212, 221, 233,0.5);
     border-radius: 10px;
 
 }
@@ -470,3 +474,46 @@
     align-items: center;
 }
 
+
+/* LOGIN */
+.login{
+    display: flex;
+    justify-content:center ;
+    margin-top: 8%;
+}
+
+.login input{
+    border-radius: 25px;
+}
+
+.login button{
+    border-radius: 25px;
+    width: 12rem;
+    justify-content: center;
+    margin: 4px;
+}
+
+.login-btn{
+    display: flex;
+    justify-content: center;
+}
+
+.login-form{
+    background-color: white;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    align-items: center;
+
+}
+
+
+.login-welcome{
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    align-items: center;
+    background-color: rgba(16, 73, 231, 0.9);
+    color: white;
+}
