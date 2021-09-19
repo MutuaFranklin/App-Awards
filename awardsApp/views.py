@@ -87,12 +87,12 @@ def publishProject(request):
     }
     return render(request, 'awards/submit-project.html', context)
 
-
+@login_required(login_url='login')
 def projectDetails(request, id):
     current_user = request.user
     project = get_object_or_404(Project, id=id)
-    currentProf = get_object_or_404(Profile, user=current_user)
     rating = Rating.objects.filter(project_id=id)
+
     
     #Total ratings for a single project
     average_design = Rating.objects.filter(id=id).aggregate(Avg('design'))
@@ -100,7 +100,6 @@ def projectDetails(request, id):
     average_content = Rating.objects.filter(id=id).aggregate(Avg('content'))
     average_score = Rating.objects.filter(id=id).aggregate(Avg('score'))
 
-    print(average_design)
    
 
      # Ratings 
@@ -115,10 +114,10 @@ def projectDetails(request, id):
         total_score = float(avg_usability + avg_design + avg_content)
         avg_score =round((total_score/3),2 )
 
-        percentage_design= avg_design * 10
-        percentage_usability= avg_usability * 10
-        percentage_content= avg_content * 10
-        percentage_score= avg_score * 10
+        # percentage_design= avg_design * 10
+        # percentage_usability= avg_usability * 10
+        # percentage_content= avg_content * 10
+        # percentage_score= avg_score * 10
 
     else:
         avg_design = 0
@@ -168,16 +167,15 @@ def projectDetails(request, id):
         "project": project,
         "reviewForm":reviewForm,
         "rateForm":rateForm,
-        "profile":currentProf,
         "rating":rating,
         "design":avg_design,
         "usability":avg_usability,
         "content":avg_content,
         "score":avg_score,
-        "pd":percentage_design,
-        "pu":percentage_usability,
-        "pc":percentage_content,
-        "ps":percentage_score
+        # "pd":percentage_design,
+        # "pu":percentage_usability,
+        # "pc":percentage_content,
+        # "ps":percentage_score
       
     }
     # template = loader.get_template('awards/project-details.html')
