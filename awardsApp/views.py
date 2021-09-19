@@ -203,9 +203,7 @@ def projectDetails(request, id):
             project_rating.average_usability = avg_usability
             project_rating.average_content = avg_content
             project_rating.score = avg_score
-            print(project_rating.score)
             project_rating.save()
-            print(project_rating)
         
             return redirect(request.META.get('HTTP_REFERER'))
     else:
