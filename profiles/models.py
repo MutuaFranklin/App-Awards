@@ -38,6 +38,7 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete() 
 
-    def edit_bio(self, new_bio):
-        self.bio = new_bio
-        self.save()
+    @classmethod
+    def update_profile(cls, prof_id, updated_bio):
+        profile = cls.objects.filter(id = prof_id).update(bio = updated_bio)
+        return profile

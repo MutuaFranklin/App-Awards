@@ -35,9 +35,15 @@ class Project(models.Model):
     def search_project(cls,project_title):
         return Project.objects.filter(title__icontains = project_title)
 
+ 
     @classmethod
     def get_user_projects(cls,profile):
         return cls.objects.filter(profile=profile)
+     
+    @classmethod
+    def update_project(cls, proj_id, updated_proj_title):
+        project = cls.objects.filter(id = proj_id).update(title = updated_proj_title)
+        return project
 
     class Meta:
         ordering = ['-date_published']
@@ -59,6 +65,11 @@ class Review(models.Model):
 
     def delete_review(self):
             self.delete()
+
+    @classmethod
+    def update_review(cls, proj_id, updated_review):
+        review = cls.objects.filter(id = proj_id).update(review = updated_review)
+        return review
 
 
     class Meta:
@@ -88,5 +99,13 @@ class Rating(models.Model):
     def get_ratings(cls, id):
         ratings = Rating.objects.filter(post_id=id).all()
         return ratings
+
+    @classmethod
+    def update_rating(cls, reviewId, newReview):
+        design_rating = cls.objects.filter(id = reviewId).update(design = newReview)
+        # usability = cls.objects.filter(id = reviewId).update(usability = newReview)
+        # content = cls.objects.filter(id = reviewId).update(content = newReview)
+        return design_rating
+
 
    

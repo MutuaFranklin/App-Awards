@@ -4,21 +4,20 @@ from .models import Profile, Project, Review, Rating
 
 class TestAppModelsClass(TestCase):
     def setUp(self):
-        self.frank = User(id = 134, username = "frank", email = "frankngumbi@gmail.com",password = "1234567")
+        self.frank = User(id=4, username = "frank", email = "frankngumbi@gmail.com",password = "1234567")
         # self.frank.save()
 
-        self.profile = Profile(id= 5, user= self.frank, bio='myself',  profile_pic='frank.jpg', location='Nairobi')
-        self.profile.save()
+        self.profile = Profile(id=3, user= self.frank, bio='myself',  profile_pic='frank.jpg', location='Nairobi')
+        # self.profile.save()
 
-      # self.profile = Profile(bio='old monk', user= self.frankfreek,followers = 'Widget', following='Widget')
-        self.project = Project(id= 3, title = 'AIB',project_image = 'aib.jpg', description = 'Its all about', publisher = self.profile)
-        self.project.save()
+        self.project = Project(id=6,title = 'AIB',project_image = 'aib.jpg', description = 'Its all about', publisher = self.profile)
+        # self.project.save()
 
-        self.rating = Rating(id = 4, project=self.project, design= 7, usability=8, content=8, score =7.67, rated_by = self.frank)
-        self.review.save_review()
+        self.rating = Rating(id=5,project=self.project, design= 7, usability=8, content=8, score =7.67, rated_by = self.frank)
+        # self.review.save_review()
 
-        self.review = Review(id = 5, project=self.project, review= 'Great idea', reviewed_by = self.frank)
-        self.review.save_review()
+        self.review = Review(id=7,project=self.project, review= 'Great idea', reviewed_by = self.frank)
+        # self.review.save_review()
    
     # Teardown
     def tearDown(self):
@@ -61,8 +60,8 @@ class TestAppModelsClass(TestCase):
 
     def test_save_rating(self):
         self.rating.save_rating()
-        reviews = Review.objects.all()
-        self.assertTrue(len(reviews)> 0)
+        rating = Rating.objects.all()
+        self.assertTrue(len(rating)> 0)
 
     def test_save_review(self):
         self.review.save_review()
@@ -71,31 +70,39 @@ class TestAppModelsClass(TestCase):
 
 
     #Update method
-    # def test_update_project(self):
-    #     self.project.save()
-    #     proj = Project.objects.last().id
-    #     Project.e (Profile,'I want this')
-    #     update_proj = Project.objects.get(id = proj)
-    #     self.assertEqual(update_proj.image_caption,'I want this') 
-
-    # def test_update_image_caption(self):
-    #     self.honda.save()
-    #     self.honda.update_caption('I want this')
-    #     self.assertEqual(self.honda.caption, 'I want this')
-
     def test_update_profile(self):
         self.profile.save()
         profile = Profile.objects.last().id
-        Profile.update_prof_bio(profile,'The man')
+        Profile.update_profile(profile,'The man')
         update_profile = Profile.objects.get(id = profile)
         self.assertEqual(update_profile.bio,'The man')
+
+    def test_update_project(self):
+        self.project.save()
+        project = Project.objects.last().id
+        Project.update_project(project, 'ML')
+        new = Project.objects.get(id = project)
+        self.assertEqual(new.title, 'ML')
+
+    def test_update_rating(self):
+        self.rating.save()
+        rating = Rating.objects.last().id
+        Rating.update_rating(rating, 6)
+        update = Rating.objects.get(id = rating)
+        self.assertEqual(update.design, 6)
+
+    def test_update_review(self):
+        self.review.save()
+        review = Review.objects.last().id
+        Review.update_review(review, "Great concept")
+        update = Review.objects.get(id = review)
+        self.assertEqual(update.review, "Great concept")
+
 
     
 
     #Delete Method
     def test_delete_project(self):
-        before_del = Project.objects.all()
-        self.assertEqual(len(before_del),1)
         self.project.delete_project()
         after_del = Project.objects.all()
         self.assertEqual(len(after_del),0)
@@ -103,18 +110,19 @@ class TestAppModelsClass(TestCase):
 
 
     def test_delete_review(self):
-        before_del = Review.objects.all()
-        self.assertEqual(len(before_del),1)
+        # before_del = Review.objects.all()
+        # self.assertEqual(len(before_del),1)
         self.review.delete_review()
         after_del  = Review.objects.all()
         self.assertTrue(len(after_del)==0)
 
-    #search
-    def test_search_project(self):
-        self.project.save()
-        user = Project.search_user('project')
-        self.assertTrue(len(user) == 1)
-
-
+  
+    # search
+    def test_search_by_title(self):
+            self.project.save()
+            project = Project.search_project('AIB')
+            self.assertTrue(len(project)== 1)
    
+
+
 

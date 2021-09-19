@@ -14,6 +14,11 @@ class UserRegistrationForm(UserCreationForm):
             "password2":None,
             "username":None,
         }
+        def __init__(self, *args, **kwargs):
+            super(UserRegistrationForm, self).__init__(*args, **kwargs)
+
+            for fieldname in ['username', 'password1', 'password2']:
+                self.fields[fieldname].help_text = None
 
         fields = ('first_name', 'last_name', 'email','username',  'password1', 'password2')
         widgets = {
@@ -21,7 +26,7 @@ class UserRegistrationForm(UserCreationForm):
             'last_name':forms.TextInput(attrs = {'class':'form-control names', 'placeholder':"Second Name", 'label': 'Second Name'}),
             'email':forms.TextInput(attrs = {'class':'form-control names', 'placeholder':"Email Address", 'label': 'Email Address'}),
             'username':forms.TextInput(attrs = {'class':'form-control names', 'placeholder':"Username", 'label': 'Username'}),
-            'password1':forms.PasswordInput(attrs = {'class':'form-control ','type':'password', 'placeholder':"Password", 'label': 'Password'}),
+            'password1':forms.PasswordInput(attrs = {'class':'form-control ', 'placeholder':"Password", 'label': 'Password'}),
             'password2':forms.PasswordInput(attrs = {'class':'form-control', 'type':'password', 'placeholder':"Confirm Password", 'label': 'Confirm Password'}),
         }
 
