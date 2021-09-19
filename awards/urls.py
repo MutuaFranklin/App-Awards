@@ -22,6 +22,7 @@ urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'', include('awardsApp.urls')),
     path('profile/',include('profiles.urls')),
+    re_path(r'^tinymce/', include('tinymce.urls')),
     re_path(r'^api-token-auth/', obtain_auth_token),
 
     # re_path(r'^accounts/', include('registration.backends.simple.urls')),

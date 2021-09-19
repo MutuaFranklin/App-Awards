@@ -2,6 +2,8 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 from profiles.models import Profile
+from tinymce.models import HTMLField
+
 
 
 
@@ -9,7 +11,7 @@ from profiles.models import Profile
 class Project(models.Model):
     title = models.CharField(max_length = 30)
     project_image = CloudinaryField('Project image')
-    description = models.TextField()
+    description = HTMLField()
     technologies = models.CharField(max_length=200, blank=True)
     project_link = models.URLField()
     publisher = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -82,6 +84,9 @@ class Rating(models.Model):
     design = models.IntegerField(blank=True)
     usability = models.IntegerField(blank=True)
     content = models.IntegerField(blank=True)
+    average_design=models.FloatField(default=0, blank=True)
+    average_usability=models.FloatField(default=0, blank=True)
+    average_content=models.FloatField(default=0, blank=True)
     score = models.FloatField(default=0, blank=True)
     rated_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='rater')
 

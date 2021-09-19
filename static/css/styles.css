@@ -282,6 +282,18 @@ body{
 }
 
 
+.review-count{
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: #301010;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 /* Progress Bar 1 */
 

@@ -8,12 +8,15 @@
        
             <div class="home-details">
                 <div class="proj-details">
+                {%  if top_project.project %}
                     <h5 class="fw-light">Top rated Project</h5>
                     <h1>{{top_project.project.title}}</h1>
                     <p class="fw-light">Published {{top_project.project.date_published|timesince}} ago by {{top_project.project.publisher}}</p>
                     {%  if top_project.project.location %}
                         <p> from {{top_project.project.location}}</p>
                     {% endif%}
+                {% endif%}
+
                 </div>
                 <div class=" container-fluid d-flex home-progress-bar">         
                     <div class="col-md-3 col-sm-6">
@@ -24,7 +27,7 @@
                             <span class="progress-right">
                                 <span class="progress-bar"></span>
                             </span>
-                            <div class="progress-value">{{top_project.design}}</div>
+                            <div class="progress-value">{{top_project.average_design}}</div>
                         </div>
                         <p class="fw-light small" >Design</p>
                     </div>
@@ -37,7 +40,7 @@
                             <span class="progress-right">
                                 <span class="progress-bar"></span>
                             </span>
-                            <div class="progress-value">{{top_project.usability}}</div>
+                            <div class="progress-value">{{top_project.average_usability}}</div>
                         </div>
                         <p class="fw-light small" >Usability</p>
 
@@ -50,7 +53,7 @@
                             <span class="progress-right">
                                 <span class="progress-bar"></span>
                             </span>
-                            <div class="progress-value">{{top_project.content}}</div>
+                            <div class="progress-value">{{top_project.average_content}}</div>
                         </div>
                         <p class="fw-light small" >Content</p>
 
@@ -83,12 +86,12 @@
             {% for project in projects %}
 
             <div class="card m-1 mb-2" style="width: 27rem;">
-                <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url}}"
+                <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url|safe}}"
                         class="card-img-top mt-2" height="350" alt="..."></a>
                 <div class="card-body proj-card">
-                    <h6 class="card-title">{{project.title}}</h6>
-                    <p class="card-text fw-light">{{project.description|truncatechars:40}}</p>                  
-                    <p class="card-text fw-light small">Published by {{project.publisher}}</p>
+                    <h6 class="card-title">{{project.title|safe}}</h6>
+                    <p class="card-text fw-light">{{project.description|safe|truncatechars:40}}</p>                  
+                    <p class="card-text fw-light small">Published by {{project.publisher|safe}}</p>
                 </div>
             </div>
 

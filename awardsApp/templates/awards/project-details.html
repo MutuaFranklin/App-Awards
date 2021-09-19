@@ -9,25 +9,33 @@
   <div class="col-md-8 project-details">
 
     <div class="card m-1 p-d" style="width: 69rem;">
-      <a href=""><img src="{{project.project_image.url}}"
+      <a href=""><img src="{{project.project_image.url|safe}}"
               class="card-img-top" height="500" alt="..."></a>
       <div class="card-body">
         <div class="proj-description">
-           <h5 class="card-title">{{project.title}}</h5>
-           <p class="card-text small">Published {{project.date_published}}</p>
-           <p class="card-text small fw-light">Technologies: {{project.technologies}}</p>
-           <p class="card-text mb-5">{{project.description}}</p>
+           <h5 class="card-title mb-3">{{project.title|safe}}</h5>
+           <p class="card-text small">Published {{project.date_published|safe}}</p>
+           <p class="card-text small fw-light">Technologies: {{project.technologies|safe}}</p>
+           <p class="card-text mb-5 fw-light text-mute">{{project.description|safe}}</p>
         </div>
          
           <div class="buttons d-flex justify-content-between">
             <a href="{%url 'userProfile' project.publisher%}">
               <button class="publisher  btn btn-secondary fw-light">
-                By {{project.publisher}}
+                By {{project.publisher|safe}}
               </button>
             </a>
 
+            {%if request.user.id == project.publisher.id%}
+            <a class="btn btn-info "  href="{% url 'update-project' project.id%}">
+              Edit
+            </a>
 
-            <a href="{{project.project_link}}" target="_blank">
+            {%endif%}
+
+
+
+            <a href="{{project.project_link|safe}}" target="_blank">
               <button class="publisher btn btn-secondary fw-light">
                 Project link
               </button>
@@ -45,8 +53,9 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="true" href="#" onClick="return showRatings();">Ratings</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onClick="return showReviews();">Reviews</a>
+            <li class="nav-item d-flex">
+              <a class="nav-link" href="#" onClick="return showReviews();">Reviews </a>
+              <div class="review-count mt-1">{{project.reviews.count}}</div>
             </li>
             
           </ul>
@@ -91,7 +100,7 @@
 
                   {% if  request.user.id == project.ratings.last.rated_by.id %}
 
-                  <p class="mt-5">Thankyou for rating this project.  Click here to review your ratings</p>
+                  <p class="mt-5">Thankyou for rating this project</p>
                   {% else %}     
                   <div class=" col-md-8 rateForm mt-4">
                     <h6>Rate this Project</h6>
@@ -133,11 +142,17 @@
 
                 <h6>Available Reviews</h6>
                 {% for review in project.reviews.all %}
+                  {% if project.reviews.all %}
                   <div class="review-details">
                      <h6 class="text-mute m-4"><a href="{%url 'userProfile' review.reviewed_by%}">{{review.reviewed_by}}</a> <span class="text-mute fw-light">{{review.reviewed_on|timesince}} ago</span></h6>
                       <p class="fw-light  m-4">{{review.review}}</p>
 
                   </div>
+                  {% else %}
+                  <p class="fw-light">
+                    No reviews
+                  </p>
+                  {% endif%}
                  
                 {% endfor%}
 

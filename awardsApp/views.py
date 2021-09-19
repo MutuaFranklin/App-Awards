@@ -1,10 +1,10 @@
 import statistics
-from awardsApp.models import Project, Profile, Rating
+from awardsApp.models import Project, Profile, Rating, Review
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import UserRegistrationForm, PublishProjectForm, RatingsForm, ReviewForm
+from .forms import UpdateUserProjectForm, UserRegistrationForm, PublishProjectForm, RatingsForm, ReviewForm
 from .email import send_welcome_email
 from django.template import loader
 from django.db.models import Avg
@@ -16,6 +16,10 @@ from rest_framework.views import APIView
 from .serializer import ProfileSerializer, ProjectSerializer
 from rest_framework import viewsets
 from rest_framework import status
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
+
+
 
 
 
@@ -58,7 +62,7 @@ def home(request):
     projects= Project.objects.all()
     # top_score = (Rating.objects.order_by('-score').values_list('score', flat=True).distinct()).first()
     top_project = Rating.objects.order_by('-score').first()
-
+    
     context = {
         "projects": projects,
         "top_project":top_project
@@ -87,11 +91,27 @@ def publishProject(request):
     }
     return render(request, 'awards/submit-project.html', context)
 
+
+class UpdateProjectView(UpdateView):
+        model=Project
+        form_class =UpdateUserProjectForm
+        template_name ='awards/editProject.html'
+        
+        def get_queryset(self): 
+            return Project.objects.all()
+
+
+        def get_success_url(self):
+       
+            return reverse_lazy('home') 
+
+
 @login_required(login_url='login')
 def projectDetails(request, id):
     current_user = request.user
     project = get_object_or_404(Project, id=id)
     rating = Rating.objects.filter(project_id=id)
+    review = Review.objects.filter(project_id=id)
 
     
     #Total ratings for a single project
@@ -100,9 +120,6 @@ def projectDetails(request, id):
     average_content = Rating.objects.filter(id=id).aggregate(Avg('content'))
     average_score = Rating.objects.filter(id=id).aggregate(Avg('score'))
 
-    # print(average_score)
-
-   
 
      # Ratings 
     design = Rating.objects.filter(project_id=id).values_list('design',flat=True)
@@ -130,7 +147,10 @@ def projectDetails(request, id):
 
 
 
-        # print(avg_design)            
+   
+
+    
+                
 
     
     #Review Form
@@ -154,10 +174,38 @@ def projectDetails(request, id):
             project_rating.project = project
             project_rating.rated_by = current_user
             project_rating.save()
+              # Ratings 
+            design = Rating.objects.filter(project_id=id).values_list('design',flat=True)
+            usability = Rating.objects.filter(project_id=id).values_list('usability',flat=True)
+            content = Rating.objects.filter(project_id=id).values_list('content',flat=True)
+            if ( len(design) > 0) and ( len(usability) > 0) and ( len(content) > 0):
 
-       
+                avg_design = round(statistics.mean(design),2)
+                avg_usability = round(statistics.mean(usability),2)
+                avg_content = round(statistics.mean(content),2)
+                total_score = float(avg_usability + avg_design + avg_content)
+                avg_score =round((total_score/3),2 )
+
+                # percentage_design= avg_design * 10
+                # percentage_usability= avg_usability * 10
+                # percentage_content= avg_content * 10
+                # percentage_score= avg_score * 10
+
+            else:
+                avg_design = 0
+                avg_usability = 0
+                avg_content = 0
+                total_score = 0
+                avg_score = 0
+
+
+            project_rating.average_design = avg_design
+            project_rating.average_usability = avg_usability
+            project_rating.average_content = avg_content
             project_rating.score = avg_score
+            print(project_rating.score)
             project_rating.save()
+            print(project_rating)
         
             return redirect(request.META.get('HTTP_REFERER'))
     else:
@@ -208,7 +256,6 @@ def search_project(request):
 
 
 # API
-#LMS
 class ProfileList(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get(self, request, format=None):

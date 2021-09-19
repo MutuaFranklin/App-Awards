@@ -55,8 +55,22 @@ class ReviewForm(forms.ModelForm):
         fields = ('review',)
 
 
+class UpdateUserProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [  'project_image', 'title','description','technologies', 'project_link']
+        widgets = {
+            'project_image':forms.FileInput(attrs={'class': 'form-control'}),
+            'title': forms.Textarea(attrs={'class':'form-control'}), 
+            'description':forms.TextInput(attrs={'class': 'form-control'}),
+            'technologies':forms.TextInput(attrs={'class': 'form-control'}),
+            'project_link': forms.TextInput(attrs={'class':'form-control'}),
+            
+        
+        }
 
- 
+
+  
 
 
 

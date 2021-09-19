@@ -140,13 +140,13 @@
                     <div class="col-sm-6 mb-3">
                       <div class="card h-100">
                         <div class="card-body">
-                          <h6 class="d-flex justify-content-center mb-3">{{project.title}}</h6>
-                          <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url}}"
+                          <h6 class="d-flex justify-content-center mb-3">{{project.title|safe}}</h6>
+                          <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url|safe}}"
                             class="card-img-top" height="200" alt="..."></a>
-                          <small>{{project.technologies}}</small>
 
-                          <p class="small">{{project.description}}</p>
-                         
+                          <p class="small mt-2">{{project.description|safe|truncatechars:40}}</p>
+                          <small class="small fw-light">{{project.technologies|safe}}</small>
+
                           
                         </div>
                       </div>
