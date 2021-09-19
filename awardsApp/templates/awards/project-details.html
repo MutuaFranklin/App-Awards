@@ -16,7 +16,7 @@
            <h5 class="card-title">{{project.title}}</h5>
            <p class="card-text small">Published {{project.date_published}}</p>
            <p class="card-text small fw-light">Technologies: {{project.technologies}}</p>
-           <p class="card-text">{{project.description}}</p>
+           <p class="card-text mb-5">{{project.description}}</p>
         </div>
          
           <div class="buttons d-flex justify-content-between">
@@ -25,7 +25,9 @@
                 By {{project.publisher}}
               </button>
             </a>
-            <a href="{{project.project_link.url}}" target="_blank">
+
+
+            <a href="{{project.project_link}}" target="_blank">
               <button class="publisher btn btn-secondary fw-light">
                 Project link
               </button>
@@ -79,49 +81,47 @@
             <button type="button" class="btn btn-primary">Content Average: {{content}}</button>          
             <button type="button" class="btn btn-primary">Average Score: {{score}}</button> -->
           </div>
-            <!-- RateForm -->
-            <!-- {{rating}} -->
-            {% for rat in project.ratings.all %}
+           
+
+           
+
             
-              <p>{{rat.rated_by}}</p>
-              
 
-          
-          
-            {% endfor %}
+            {% if request.user.id != project.publisher.user.id %}
 
-            {% if profile in project.ratings.all %}
-            
-              <p>Done</p>
-              
+                  {% if  request.user.id == project.ratings.last.rated_by.id %}
 
-          
+                  <p class="mt-5">Thankyou for rating this project.  Click here to review your ratings</p>
+                  {% else %}     
+                  <div class=" col-md-8 rateForm mt-4">
+                    <h6>Rate this Project</h6>
+
+                    <form action="" method="post">
+                      {% csrf_token %}
+                        <div class="row">
+                          <div class="col">
+                            {{rateForm.design }}              
+                          </div>
+                          <div class="col">
+                            {{ rateForm.usability }}              
+                          </div>
+                          <div class="col">
+                            {{ rateForm.content }}              
+                          </div>
+                          <div class="col">
+                            <button class="btn btn-sm btn-primary" style="height: 40px; width: 5rem;" >Rate</button>                   
+                          </div>
+                        </div>
+                      </form>
+                      
+                  </div>
+                  {% endif%}
+            {% else %}
+              <h6 class="mt-5">Rate this Project</h6>
+      
+              <p class="mt-3">You cannot rate your own project</p>
           
             {% endif %}
-
-            
-            <div class=" col-md-8 rateForm mt-4">
-              <h6>Rate this Project</h6>
-
-              <form action="" method="post">
-                {% csrf_token %}
-                  <div class="row">
-                    <div class="col">
-                      {{rateForm.design }}              
-                    </div>
-                    <div class="col">
-                      {{ rateForm.usability }}              
-                    </div>
-                    <div class="col">
-                      {{ rateForm.content }}              
-                    </div>
-                    <div class="col">
-                      <button class="btn btn-sm btn-primary" style="height: 40px; width: 5rem;" >Rate</button>                   
-                    </div>
-                  </div>
-                </form>
-                
-            </div>
           </div>
 
           <div id="reviews">
@@ -129,7 +129,7 @@
               <div class="reviewForm ">
                 <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#reviewModal">Review this Project</button>
 
-                {% include "modals/reviewModal.html" %}
+                
 
                 <h6>Available Reviews</h6>
                 {% for review in project.reviews.all %}
@@ -163,7 +163,7 @@
   </div>
 
 
-
+  {% include "modals/reviewModal.html" %}
 
 
 

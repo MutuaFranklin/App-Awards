@@ -8,7 +8,7 @@ body{
     color: darkblue !important;
 }
 .navbar-brand{
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     color: rgb(17, 60, 204) !important;
 }
@@ -548,3 +548,4 @@ body{
     font-size: 20px;
 
 }
+

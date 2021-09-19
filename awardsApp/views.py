@@ -58,7 +58,7 @@ def home(request):
     projects= Project.objects.all()
     # top_score = (Rating.objects.order_by('-score').values_list('score', flat=True).distinct()).first()
     top_project = Rating.objects.order_by('-score').first()
-    # print(top_project.design)
+
     context = {
         "projects": projects,
         "top_project":top_project
@@ -99,6 +99,8 @@ def projectDetails(request, id):
     average_usability = Rating.objects.filter(id=id).aggregate(Avg('usability'))
     average_content = Rating.objects.filter(id=id).aggregate(Avg('content'))
     average_score = Rating.objects.filter(id=id).aggregate(Avg('score'))
+
+    # print(average_score)
 
    
 

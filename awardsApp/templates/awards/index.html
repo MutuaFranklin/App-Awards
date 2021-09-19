@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="container-fluid">
+<!-- <div class="container-fluid"> -->
     
     <div class="col-md-12 featured" >
        
@@ -82,12 +82,12 @@
         <div class="row justify-content-center">
             {% for project in projects %}
 
-            <div class="card m-1" style="width: 25rem;">
+            <div class="card m-1 mb-2" style="width: 27rem;">
                 <a href="{%url 'project-details' project.id %}"><img src="{{project.project_image.url}}"
-                        class="card-img-top" height="350" alt="..."></a>
+                        class="card-img-top mt-2" height="350" alt="..."></a>
                 <div class="card-body proj-card">
                     <h6 class="card-title">{{project.title}}</h6>
-                    <p class="card-text fw-light">{{project.description}}</p>                  
+                    <p class="card-text fw-light">{{project.description|truncatechars:40}}</p>                  
                     <p class="card-text fw-light small">Published by {{project.publisher}}</p>
                 </div>
             </div>
@@ -105,6 +105,6 @@
 
 
 
-</div>
+<!-- </div> -->
 
 {% endblock %}

@@ -89,6 +89,10 @@ MIDDLEWARE = [
 
 ]
 
+
+
+
+
 ROOT_URLCONF = 'awards.urls'
 
 TEMPLATES = [
