@@ -544,6 +544,16 @@ body{
     color: white;
 }
 
+/* SIGNUP  */
+.dont-account{
+    display: flex;
+    justify-content: center;
+}
+
+.register-form input{
+    border-radius: 25px;
+
+}
 
 /* SEARCH  */
 .search{

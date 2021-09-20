@@ -18,43 +18,18 @@
         <div class="panel-body">
 
          
-          <form action="" method="post">
+          <form action="" method="post" class="register-form fw-light">
             {% csrf_token %}
-            <!-- {% bootstrap_form reg_form%} -->
-            <div class="form-group info">
-              <div class="form-floating mb-3 info">
-                {{reg_form.first_name }}
-                <label for="floatingInput">First Name</label>
-              </div>
-              <div class="form-floating mb-3 info">
-                {{ reg_form.last_name }}
-                <label for="floatingInput">Last Name</label>
-              </div>
-              <div class="form-floating mb-3 info">
-                {{ reg_form.username }}
-                <label for="floatingInput">Username</label>
-              </div>
-              <div class="form-floating mb-3 info">
-                {{ reg_form.email }}
-                <label for="floatingInput">Email Address</label>
-              </div>
-              <div class="form-control mb-3 info">
-                {{ reg_form.password1 }}
-                <label for="floatingInput">Password</label>
-              </div>
-              <div class="form-control mb-3 info">
-                {{ reg_form.password2 }}
-                <label for="floatingInput">Confirm Password</label>
-              </div>
-            </div>
+            {% bootstrap_form reg_form%}
+           
             <div class=" d-grid gap-1">
               <button class="btn btn-primary" type="submit">Sign Up</button>
             </div> 
           <input type="hidden" name="next" value="{{next}}">
           </form>
           <div class="card mt-2">
-            <div class="card-body mt-3 mb-2 mr-3 ml-3">
-                <p>Have an account? <a href="{% url 'login' %}">Log in</a></p>
+            <div class="card-body mt-3 mb-2 mr-3 ml-3 dont-account">
+                <p class="fw-light">Have an account? <a href="{% url 'login' %}">Log in</a></p>
             </div>
         </div>
 
