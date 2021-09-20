@@ -14,7 +14,7 @@
       <div class="card-body">
         <div class="proj-description">
            <h5 class="card-title mb-3">{{project.title|safe}}</h5>
-           <p class="card-text small">Published {{project.date_published|safe}}</p>
+           <p class="card-text small">Published {{project.date_published|date|safe}}</p>
            <p class="card-text small fw-light">Technologies: {{project.technologies|safe}}</p>
            <p class="card-text mb-5 fw-light text-mute">{{project.description|safe}}</p>
         </div>
@@ -62,27 +62,31 @@
         </div>
         <div class="card-body">
           <!-- Ratings -->
+          
           <div id="ratings">
+            <fieldset class="starability-result mx-auto m-3" data-rating="5">
+            </fieldset>
+
             <h5 class="card-title m-2">Project Ratings</h5>
             <div class="col-md-5 rates">
             <h6 class="mt-2 fw-light">Average Design</h6>
               <div class="progressDesign">
-                <div class="progress-value1" style="width:50%"><span class="">{{design}}</span></div>
+                <div class="progress-value1" style="width:100%" ><span class="">{{design}}</span></div>
               </div>
 
               <h6 class="mt-2 fw-light">Average Usability</h6>
               <div class="progressUsability">
-                <div class="progress-value2" style="width: 60%"><span>{{usability}}</span></div>
+                <div class="progress-value2" style="width:100%"><span>{{usability}}</span></div>
               
               </div>
               <h6 class="mt-2 fw-light">Average Content</h6>
               <div class="progressContent">
-                <div class="progress-value3" style="width: 60%"><span>{{content}}</span></div>
+                <div class="progress-value3" style="width: 100%"><span>{{content}}</span></div>
               </div>
               
               <h6  class="mt-2 fw-light">Average Score</h6>
               <div class="progressScore">
-                <div class="progress-value4" style="width: 64%"><span> {{score}}</span></div>
+                <div class="progress-value4" style="width: 100%"><span> {{score}}</span></div>
               </div>
               
             <!-- <button type="button" class="btn btn-primary">Design Average: {{design}}</button>

@@ -84,9 +84,6 @@ class Rating(models.Model):
     design = models.IntegerField(blank=True)
     usability = models.IntegerField(blank=True)
     content = models.IntegerField(blank=True)
-    average_design=models.FloatField(default=0, blank=True)
-    average_usability=models.FloatField(default=0, blank=True)
-    average_content=models.FloatField(default=0, blank=True)
     score = models.FloatField(default=0, blank=True)
     rated_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='rater')
 

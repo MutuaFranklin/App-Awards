@@ -20,9 +20,6 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 
 
-
-
-
 # Create your views here
 def register(request):
     reg_form = UserRegistrationForm()
@@ -60,9 +57,8 @@ def login_user(request):
 
 def home(request):
     projects= Project.objects.all()
-    # top_score = (Rating.objects.order_by('-score').values_list('score', flat=True).distinct()).first()
     top_project = Rating.objects.order_by('-score').first()
-    
+       
     context = {
         "projects": projects,
         "top_project":top_project
@@ -133,24 +129,15 @@ def projectDetails(request, id):
         total_score = float(avg_usability + avg_design + avg_content)
         avg_score =round((total_score/3),2 )
 
-        # percentage_design= avg_design * 10
-        # percentage_usability= avg_usability * 10
-        # percentage_content= avg_content * 10
-        # percentage_score= avg_score * 10
 
+        
     else:
         avg_design = 0
         avg_usability = 0
         avg_content = 0
         total_score = 0
         avg_score = 0
-
-
-
-   
-
-    
-                
+           
 
     
     #Review Form
@@ -220,10 +207,7 @@ def projectDetails(request, id):
         "usability":avg_usability,
         "content":avg_content,
         "score":avg_score,
-        # "pd":percentage_design,
-        # "pu":percentage_usability,
-        # "pc":percentage_content,
-        # "ps":percentage_score
+       
       
     }
     # template = loader.get_template('awards/project-details.html')

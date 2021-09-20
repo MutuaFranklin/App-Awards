@@ -1,16 +1,3 @@
-function copyToClipboard() {
-    /* Get the text field */
-    var copyText = document.getElementById("url");
-
-    /* Select the text field */
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
-
-    /* Copy the text inside the text field */
-    document.execCommand("copy");
-
-    alert("Successfully copied Image link!");
-}
 
 
 
@@ -27,3 +14,24 @@ function showReviews() {
 
 
 }
+
+
+
+var $star_rating = $('.star-rating .fa');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('fa-star-o').addClass('fa-star');
+    } else {
+      return $(this).removeClass('fa-star').addClass('fa-star-o');
+    }
+  });
+};
+
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
