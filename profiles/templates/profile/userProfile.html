@@ -126,9 +126,11 @@
                       </div>
                       <hr>
                       <div class="row">
+                        {% if profile.user.id == request.user.id %}
                         <div class="col-sm-12">
                           <a class="btn btn-info "  href="{% url 'update-profile' profile.user.id%}">Edit</a>
                         </div>
+                        {% endif %}
                       </div>
                     </div>
                   </div>
