@@ -288,7 +288,7 @@ class ProjectDescription(APIView):
 
     
     def put(self, request, pk, format=None):
-        project = self.get_project()(pk)
+        project = self.get_project(pk)
         serializers = ProjectSerializer(project, request.data)
         if serializers.is_valid():
             serializers.save()
